@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		.mui-btn-block {
+		    width: 50%;
+		    height: 40px;
+		    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+		    border: none;
+		    border-radius: 20px;
+		    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		    color: white;
+		    font-weight: bold;
+		    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+		    transition: all 0.3s ease;
+		}
+		
+		.mui-btn-block:hover {
+		    background-image: linear-gradient(to right, #e0314d, #ff4d6a);
+		    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+		    transform: scale(1.05);
+		}
+		body::before {
+		    content: '';
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    z-index: -1;
+		    background: linear-gradient(135deg, #ff4d6a, #2BA9EA);
+		    background-size: 400% 400%;
+		    animation: gradientAnimation 15s ease infinite;
+		}
+		
+		@keyframes gradientAnimation {
+		    0% {background-position: 0% 50%;}
+		    50% {background-position: 100% 50%;}
+		    100% {background-position: 0% 50%;}
+		}
+	</style>
+	<body>
+		<div style="display: flex;justify-content: center;align-items: center;margin-top: 150px;">
+			<div style="width: 550px;height: 400px;background-color: white;padding: 20px;box-shadow: 0 4px 8px rgba(0,0,0,0.1);border-radius: 4px;">
+				<div style="margin-top: 25px;">
+					<p style="color: black;font-size: 17px;font-weight: bold;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">账号：</p>
+					<input id="username" style="border: none;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);"" type="text" placeholder="请输入"/>
+				</div>
+				<hr style="width: 95%;transform: translateY(-20px);" />
+				
+				<div style="margin-top: 25px;">
+					<p style="color: black;font-size: 17px;font-weight: bold;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">密码：</p>
+					<input id="password" style="border: none;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);"" type="text" placeholder="请输入密码"/>
+				</div>
+				<hr style="width: 95%;transform: translateY(-20px);" />
+				
+				<div style="margin-top: 25px;">
+					<p style="color: black;font-size: 17px;font-weight: bold;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);">手机号码(可随意输入,不过可能已被注册)：</p>
+					<input id="phone" style="border: none;text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);"" type="text" placeholder="请输入电话号码"/>
+				</div>
+				<hr style="width: 95%;transform: translateY(-20px);" />
+				
+				<div style="margin-top: 50px;display: flex;justify-content: center;" class="mui-content-padded" style="display: flex;justify-content: center;">
+					<button type="button" class="mui-btn mui-btn-blue mui-btn-block" class="mui-btn-custom">
+						<p style="color: white;margin-top: -4px;">注册</p>
+					</button>
+				</div>
+			</div>
+		</div>
+		<p style="margin-top: 100px;text-align: center;color: white;" onclick="login()">已有账号返回登录页面</p>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/request.js"></script>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript">
+			
+			document.querySelector('.mui-btn').addEventListener('click', function() {
+				let userdata = {
+					"userName": document.getElementById('username').value,
+					"password": document.getElementById('password').value,
+					"phonenumber": document.getElementById('phone').value,
+					"sex": 1
+				}
+				if(userdata.userName.trim() !== '' && userdata.password.trim() !== '' && userdata.phonenumber.trim() !== '' ) {
+					request('/prod-api/api/register',userdata,'POST').then(res => {
+						console.log(res);
+						if(res.code === 200) {
+							mui.toast('注册成功')
+						}else {
+							mui.toast(`${res.msg}`)	
+						}
+					})
+				}else{
+					mui.toast('账号或密码不能为空')
+				}
+			})
+			function login(){
+				mui.openWindow('index.html')
+			}
+		</script>
+	</body>
+
+</html>

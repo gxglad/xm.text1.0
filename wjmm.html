@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		.mui-btn-custom {
+		    width: 50%;
+		    height: 40px;
+		    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+		    border: none;
+		    border-radius: 20px;
+		    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		    color: white;
+		    font-weight: bold;
+		    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+		    transition: all 0.3s ease;
+		}
+		
+		.mui-btn-custom:hover {
+		    background-image: linear-gradient(to right, #e0314d, #ff4d6a);
+		    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+		    transform: scale(1.05);
+		}
+		body::before {
+		    content: '';
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    z-index: -1;
+		    background: linear-gradient(135deg, #ff4d6a, #2BA9EA);
+		    background-size: 400% 400%;
+		    animation: gradientAnimation 15s ease infinite;
+		}
+		
+		@keyframes gradientAnimation {
+		    0% {background-position: 0% 50%;}
+		    50% {background-position: 100% 50%;}
+		    100% {background-position: 0% 50%;}
+		}
+	</style>
+
+	<body>
+		<div style="display: flex;justify-content: center;align-items: center;margin-top: 150px;">
+			<div style="width: 550px;height: 400px;background-color: white;padding: 20px;box-shadow: 0 4px 8px rgba(0,0,0,0.1);border-radius: 4px;">
+				<p>该功能懒得做，如果忘记密码了，你可以重新注册一个账号，或者输入万能账号密码</p>
+				<p>万能账号：高鑫是大帅哥</p>
+				<p>万能密码：我承认高鑫比我帅</p>
+			</div>
+		</div>
+		<p onclick="index()" style="text-align: center;color: white;margin-top: 20px;">如果已经找到你的密码，点击我返回登录（不可能没找到）</p>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="./js/request.js"></script>
+		<script src="./js/jquery.js"></script>
+		<script type="text/javascript">
+			function index(){
+				mui.openWindow('index.html')
+			}
+		</script>
+	</body>
+
+</html>	
